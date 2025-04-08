@@ -46,12 +46,6 @@ class Quote extends Model implements HasMedia, Viewable
         'show_amount_and_total',
         'expiration_date',
         'show_packages',
-        'party_date',
-        'location',
-        'party_type',
-        'start_time',
-        'end_time',
-        'guest_amount',
     ];
 
     public function customer()

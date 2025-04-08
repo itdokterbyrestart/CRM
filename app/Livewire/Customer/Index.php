@@ -30,13 +30,6 @@ class Index extends Component
 
     public $with_order_created_at, $customer_with_order_created_at;
 
-    public $party_fields_enabled = 0;
-
-    public function mount()
-    {
-        $this->party_fields_enabled = Setting::where('name', 'enable_party_fields')->first()->value ?? 0;
-    }
-
 
     #[On('refreshParent')]
     public function refreshParent()

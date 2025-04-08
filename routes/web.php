@@ -8,8 +8,6 @@ use App\Http\Controllers\{
 	CustomerController,
 	ProductController,
 	HourTypeController,
-	InfoController,
-	EmailController,
 	PermissionController,
 	RoleController,
 	QuoteStatusController,
@@ -24,7 +22,6 @@ use App\Http\Controllers\{
 	UserController,
 };
 use App\Http\Controllers\Auth\ProfileController;
-use App\Models\Setting;
 
 
 /*
@@ -59,14 +56,6 @@ Route::get('/factuur/{id}/betalen', [InvoiceController::class, 'preparePayment']
 
 Route::get('/factuur/{id}/download_pdf', [InvoiceController::class, 'downloadPdf'])
 	->name('invoice.customer.download_pdf');
-
-if ((Setting::where('name','enable_prijsopgave_module')->first()->value) ?? 0 == 1) {
-	Route::get('/prijsopgave', [QuoteController::class, 'prijsopgave'])
-		->name('quote.customer.prijsopgave');
-
-	Route::get('/prijsopgave/{prijsopgave_id}', [QuoteController::class, 'unsubscribe_prijsopgave_email'])
-		->name('quote.customer.prijsopgave_unsubscribe');
-}
 
 
 Route::group(['middleware' => ['auth']], function () {
@@ -283,8 +272,4 @@ Route::group(['middleware' => ['auth']], function () {
 	// Route::get('/quote_reminder_mail/{quote_id}', [EmailController::class, 'quote_reminder_mail']);
 	// Route::get('/schedule_appointment_mail/{id}/{reminder}/{appointment_type}', [EmailController::class, 'schedule_appointment_mail']);
 	// Route::get('/apk_reminder_mail/{customer_id}/{final_reminder}', [EmailController::class, 'apk_reminder_mail']);
-	// Route::get('/prijsopgave_mail_confirmation/{quote_id}', [EmailController::class, 'prijsopgave_mail_confirmation']);
-	// Route::get('/prijsopgave_reminder_mail/{prijsopgave_id}/{reminder}', [EmailController::class, 'prijsopgave_reminder_mail']);
-	// Route::get('/prijsopgave_contact_info_to_business_mail/{prijsopgave_id}', [EmailController::class, 'prijsopgave_contact_info_to_business_mail']);
-
 });

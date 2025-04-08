@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\{
     Quote,
     Setting,
-    Prijsopgave,
 };
 
 use App\Mail\{
@@ -81,22 +80,6 @@ class QuoteController extends Controller
         }
 
         return view('frontend.quote.show', compact('pageConfigs','quote','quote_products','quote_product_groups','terms_and_services_link','package_image','deposit_enabled','deposit_percentage_amount'));
-    }
-
-    public function prijsopgave()
-    {
-        $pageConfigs = ['blankPage' => true];
-
-        return view('frontend.prijsopgave.show', compact('pageConfigs'));
-    }
-
-    public function unsubscribe_prijsopgave_email($prijsopgave_id)
-    {
-        $pageConfigs = ['blankPage' => true];
-
-        Prijsopgave::destroy($prijsopgave_id);
-
-        return view('frontend.prijsopgave.unsubscribe', compact('pageConfigs'));
     }
 
     public function email_preview($quote_id)

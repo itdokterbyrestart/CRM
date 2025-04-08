@@ -35,13 +35,10 @@ class Form extends Component
     // General
     public $edit = 1;
     public $users, $tax_types;
-    public $show_party_fields = 0;
     // Quote
     public $title, $customer, $status = '', $status_comment, $description, $expiration_date, $quote_text, $show_product_group_images = true, $show_amount_and_total = true, $updated_at, $created_at, $modelId;
     public $customers, $quotestatus;
     public $collapsed_view = false, $show_packages = true, $package_image, $new_package_image;
-    // Party fields
-    public $party_date, $location_array = [], $location = "", $party_type_array = [], $party_type = "", $start_time, $end_time, $guest_amount;
     // Quote Product Groups
     public $product_groups, $selected_product_groups = [];
     // Quote Product
@@ -71,124 +68,7 @@ class Form extends Component
         $this->quote_text = Setting::where('name','quote_text')->first()->value;
         $this->expiration_date = Carbon::now()->addDays(14)->format('Y-m-d');
         $this->show_amount_and_total = Setting::where('name','default_show_amount_and_total_for_quote')->first()->value == 1 ? true : false;
-        $this->show_party_fields = Setting::where('name','enable_party_fields')->first()->value == 1 ? true : false;
         $this->status = $this->quotestatus->where('name', 'Nog maken')->first()->id ?? '';
-        $this->party_type_array = [
-            'Bruiloft',
-            'Verjaardagsfeest',
-            'Jubileumfeest',
-            'Bedrijfsfeest',
-            'Evenement',
-            'Festival',
-            'Overig',
-        ];
-        $this->location_array = [
-            'Veghel',
-            'Geldrop',
-            'Sint-Oedenrode',
-            'Schijndel',
-            'Erp',
-            'Boerdonk',
-            'Boskant',
-            'Eerde',
-            'Keldonk',
-            'Mariaheide',
-            'Nijnsel',
-            'Wijbosch',
-            'Zijtaart',
-            'Uden',
-            'Schaijk',
-            'Zeeland',
-            'Volkel',
-            'Odiliapeel',
-            'Reek',
-            'Heesch',
-            'Heeswijk-Dinther',
-            'Loosbroek',
-            'Nistelrode',
-            'Vinkel',
-            'Vorstenbosch',
-            'Langenboom',
-            'Wilbertoord',
-            'Mill',
-            'Herpen',
-            'Ravenstein',
-            'Rijkevoort',
-            'Den bosch',
-            'Nuland',
-            'Rosmalen',
-            'Boxtel',
-            'Liempde',
-            'Esch',
-            'Vught',
-            'Helvoirt',
-            'Cromvoirt',
-            'Sint-Michielsgestel',
-            'Berlicum',
-            'Den Dungen',
-            'Gemonde',
-            'Maaskantje',
-            'Middelrode',
-            'Vlijmen',
-            'Oss',
-            'Grave',
-            'Berghem',
-            'Elshout',
-            'Nieuwkuijk',
-            'Haarsteeg',
-            'Hedel',
-            'Geffen',
-            'Eindhoven',
-            'Son en Breugel',
-            'Best',
-            'Nuenen',
-            'Helmond',
-            'Stiphout',
-            'Oirschot',
-            'Gerwen',
-            'Nederwetten',
-            'Gemert',
-            'Bakel',
-            'De Mortel',
-            'Elsendorp',
-            'Handel',
-            'Milheeze',
-            'Boekel',
-            'Beek en Donk',
-            'Milheeze',
-            'Venhorst',
-            'Huize Padua',
-            'Mariahout',
-            'Tilburg',
-            'Oisterwijk',
-            'Waalwijk',
-            'Moergestel',
-            'Berkel Enschot',
-            'Kaatsheuvel',
-            'Udenhout',
-            'Haaren',
-            'Drunen',
-            'Biezenmortel',
-            'Loon op Zand',
-            'Cuijk',
-            'Milsbeek',
-            'Gennep',
-            'Heijen',
-            'Groesbeek',
-            'Malden',
-            'Mook',
-            'Beers',
-            'Overasselt',
-            'Heumen',
-            'Wijchen',
-            'Nijmegen',
-            'Beuningen',
-            'Ewijk',
-            'Berg en Dal',
-            'Lent',
-        ];
-        sort($this->location_array);
-        array_unshift($this->location_array,'De plaats staat niet in de lijst');
         $this->edit = $edit;
         if ($model) {
             $this->modelId = $model->id;
@@ -208,12 +88,6 @@ class Form extends Component
             $this->show_packages = ($model->show_packages == 1 ? true : false);
             $this->show_amount_and_total = ($model->show_amount_and_total == 1 ? true : false);
             $this->package_image = $model->getMedia('packages')->count() > 0 ? $model->getMedia('packages')->first()->getUrl() : null;
-            $this->party_date = (!empty($model->party_date) ? Carbon::parse($model->party_date)->format('Y-m-d') : null);
-            $this->location = $model->location ?? "";
-            $this->party_type = $model->party_type ?? "";
-            $this->start_time = substr($model->start_time, 0, 5);
-            $this->end_time = substr($model->end_time, 0, 5);
-            $this->guest_amount = $model->guest_amount;
             foreach ($model->quote_products as $index => $quote_product) {
                 $this->quoteproducts[] = $quote_product->order ?? (is_array($this->quoteproducts) && !empty($this->quoteproducts) ? max($this->quoteproducts) + 1 : 1);
                 $this->product_id[$index] = $quote_product->id;
@@ -289,23 +163,6 @@ class Form extends Component
             'show_packages' => 'required|boolean|max:1',
             'new_package_image' => 'nullable|image|mimes:png,jpg,jpeg|max:10240|dimensions:min_width=50,min_height=50',
 
-            'party_date' => 'nullable|date_format:Y-m-d',
-            'location' => 'nullable|string|in:' . implode(',', $this->location_array),
-            'party_type' => 'nullable|string|in:' . implode(',', $this->party_type_array),
-            'start_time' => ['nullable', 'date_format:H:i', function($attribute, $value, $fail) {
-                $parts = explode(':', $value);
-                if (count($parts) != 2 || intval($parts[1]) % 5 !== 0) {
-                    $fail('De starttijd moet binnen een interval van 5 minuten vallen.');
-                }
-            }],
-            'end_time' => ['nullable', 'date_format:H:i', function($attribute, $value, $fail) {
-                $parts = explode(':', $value);
-                if (count($parts) != 2 || intval($parts[1]) % 5 !== 0) {
-                    $fail('De eindtijd moet binnen een interval van 5 minuten vallen.');
-                }
-            }],
-            'guest_amount' => 'nullable|numeric',
-
             'product_name.*' => 'required|string|max:255',
             'product_purchase_price_excluding_tax.*' => 'required|numeric|between:-99999.99,99999.99',
             'product_purchase_price_including_tax.*' => 'required|numeric|between:-99999.99,99999.99',
@@ -348,13 +205,6 @@ class Form extends Component
         'show_amount_and_total' => 'aantal en totaal weergeven',
         'show_packages' => 'pakketten weergeven',
         'new_package_image' => 'pakket afbeelding',
-
-        'party_date' => 'feestdatum',
-        'location' => 'Feestlocatie',
-        'party_type' => 'feest type',
-        'start_time' => 'starttijd',
-        'end_time' => 'eindtijd',
-        'guest_amount' => 'aantal gasten',
 
         'product_name.*' => 'product naam',
         'product_purchase_price_excluding_tax.*' => 'inkoopprijs excl. BTW',
@@ -779,13 +629,6 @@ class Form extends Component
 
         try{
             DB::transaction(function () {
-                $party_date = $this->party_date != "" ? $this->party_date : null;
-                $location = $this->location != "" ? $this->location : null;
-                $party_type = $this->party_type != "" ? $this->party_type : null;
-                $start_time = $this->start_time != "" ? $this->start_time : null;
-                $end_time = $this->end_time != "" ? $this->end_time : null;
-                $guest_amount = $this->guest_amount != "" ? $this->guest_amount : null;
-
                 $quote = Quote::with('quote_statuses')->updateOrCreate(
                     ['id' => $this->modelId],
                     [
@@ -798,12 +641,6 @@ class Form extends Component
                         'show_product_group_images' => $this->show_product_group_images,
                         'show_packages' => $this->show_packages,
                         'show_amount_and_total' => $this->show_amount_and_total,
-                        'party_date' => $party_date,
-                        'location' => $location,
-                        'party_type' => $party_type,
-                        'start_time' => $start_time,
-                        'end_time' => $end_time,
-                        'guest_amount' => $guest_amount,
                     ]
                 );
 

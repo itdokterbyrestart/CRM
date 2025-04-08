@@ -34,7 +34,7 @@ class Index extends Component
 
     public $selectedCustomer;
 
-    public $show_page_view_count = true, $show_dates = true, $show_party_fields = 0;
+    public $show_page_view_count = true, $show_dates = true;
 
     public function mount()
     {
@@ -48,7 +48,6 @@ class Index extends Component
             ->where('name', 'Akkoord')
             ->first();
         $this->show_company_names = Setting::where('name', 'show_company_in_customer_list')->first()->value;
-        $this->show_party_fields = Setting::where('name','enable_party_fields')->first()->value == 1 ? true : false;
     }
 
     public function updatingSearch()
@@ -284,7 +283,7 @@ class Index extends Component
         
         $convert_status = OrderStatus::where('name','Nog doen')->first();
 
-        $title = ($this->show_party_fields == true ? (in_array($quote->party_type, ['Bruiloft', 'Verjaardagsfeest', 'Jubileumfeest', 'Bedrijfsfeest']) ? 'Feest' : (in_array($quote->party_type, ['Evenement', 'Festival']) ? 'Evenement' : 'Overig')) . ' | '  : '') . $quote->title;
+        $title = $quote->title;
 
         try{
             DB::transaction(function () use ($convert_status, $quote, &$order, $deposit, $title) {
@@ -298,7 +297,7 @@ class Index extends Component
                     'total_price_customer_including_tax' => 0,
                     'total_purchase_price_excluding_tax' => 0,
                     'total_profit' => 0,
-                    'created_at' => ($this->show_party_fields == true ? ($quote->party_date ?? Carbon::now()) : Carbon::now()),
+                    'created_at' => Carbon::now(),
                 ]);
 
                 $array_total_price_customer_excluding_tax = [];
@@ -353,7 +352,7 @@ class Index extends Component
                         'order_id' => $order->id,
                         'total_purchase_price_excluding_tax' => ($total_purchase_price_excluding_tax_product ?? 0) * $deposit_percentage_amount,
                         'order' => $product_order++,
-                        'created_at' => ($this->show_party_fields == true ? ($quote->party_date ?? Carbon::now()) : Carbon::now()),
+                        'created_at' => Carbon::now(),
                     ]);
 
                     $array_total_price_customer_excluding_tax[] = number_format((float)$revenue, 2, '.', '');

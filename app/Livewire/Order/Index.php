@@ -28,7 +28,6 @@ class Index extends Component
     public $search = '';
     public $sortColumn = 'order_statuses.order', $sortDirection = 'ASC';
     public $selectedStatuses = [], $order_statuses = [];
-    public $party_fields_enabled = 0;
 
     public $selectedCustomer, $selectedOrder;
 
@@ -44,7 +43,6 @@ class Index extends Component
 
         $this->order_statuses = OrderStatus::orderBy('order')->get();
         $this->show_company_names = Setting::where('name', 'show_company_in_customer_list')->first()->value ?? 1;
-        $this->party_fields_enabled = Setting::where('name', 'enable_party_fields')->first()->value ?? 0;
     }
 
     public function updatingSearch()

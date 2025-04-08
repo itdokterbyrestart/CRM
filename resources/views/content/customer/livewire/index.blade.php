@@ -91,7 +91,6 @@
                                                     <a class="btn btn-secondary" href="{{ route('customer.edit', $customer->id) }}">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
-                                                    @if ($party_fields_enabled == 0)
                                                     <button class="btn btn-success" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                         <i class="fas fa-calendar"></i>
                                                     </button>
@@ -103,7 +102,6 @@
                                                             APK
                                                         </li>
                                                     </ul>
-                                                    @endif
                                                     @can('delete customer')
                                                         <button class="btn btn-danger" wire:click="deleteConfirm('{{ $customer->id }}')">
                                                             <i class="fas fa-trash"></i>

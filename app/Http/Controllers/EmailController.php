@@ -15,9 +15,6 @@ use App\Mail\{
     QuoteMailConfirmation,
 	QuoteReminderMail,
 	ScheduleAppointmentMail,
-	PrijsopgaveMailConfirmation,
-    PrijsopgaveReminderMail,
-	PrijsopgaveContactInfoToBusinessMail,
 };
 
 class EmailController extends Controller
@@ -90,20 +87,5 @@ class EmailController extends Controller
 	public function apk_reminder_mail($customer_id, $final_reminder)
 	{
 		return new ApkReminderMail($customer_id, $final_reminder);
-	}
-
-	public function prijsopgave_mail_confirmation($quote_id)
-	{
-		return new PrijsopgaveMailConfirmation($quote_id);
-	}
-
-	public function prijsopgave_reminder_mail($prijsopgave_id, $reminder)
-	{
-		return new PrijsopgaveReminderMail($prijsopgave_id, $reminder);
-	}
-
-	public function prijsopgave_contact_info_to_business_mail($prijsopgave_id)
-	{
-		return new PrijsopgaveContactInfoToBusinessMail($prijsopgave_id);
 	}
 }

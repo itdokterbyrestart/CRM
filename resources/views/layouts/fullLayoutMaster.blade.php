@@ -32,7 +32,7 @@ $configData = Helper::applClasses();
     data-menu=" vertical-menu-modern" data-layout="{{ ($configData['theme'] === 'light') ? '' : $configData['layoutTheme'] }}" style="{{ $configData['bodyStyle'] }}" data-framework="laravel" data-asset-path="{{ asset('/')}}">
 
   <!-- BEGIN: Content-->
-  <div class="app-content content {{ $configData['pageClass'] }}" @if (Route::currentRouteName() != 'quote.customer.prijsopgave') style="background-image: linear-gradient(150deg, {{ config('app.PRIMARY_GRADIENT_COLOR') ?? '#0f70b7' }} 10%, {{ config('app.SECONDARY_GRADIENT_COLOR') ?? '#28a9e1' }} 100%) !important;" @else style="background-color: #ffffff !important;" @endif>
+  <div class="app-content content {{ $configData['pageClass'] }}" style="background-image: linear-gradient(150deg, {{ config('app.PRIMARY_GRADIENT_COLOR') ?? '#0f70b7' }} 10%, {{ config('app.SECONDARY_GRADIENT_COLOR') ?? '#28a9e1' }} 100%) !important;">
     <div class="content-wrapper">
       <div class="content-body">
 
