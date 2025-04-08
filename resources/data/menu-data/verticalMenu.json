@@ -1,0 +1,141 @@
+{
+	"menu": [
+		{
+			"route": "dashboard",
+			"name": "Dashboard",
+			"icon": "home",
+			"slug": "dashboard",
+			"permission": "show dashboard"
+		},
+		{
+			"route": "quote.index",
+			"name": "Offertes",
+			"icon": "boxes",
+			"slug": "quote.index"
+		},			
+		{
+			"route": "order.index",
+			"name": "Opdrachten",
+			"icon": "euro-sign",
+			"slug": "order.index"
+		},
+		{
+			"route": "invoice.index",
+			"name": "Facturen",
+			"icon": "file-invoice",
+			"slug": "invoice.index"
+		},
+		{
+			"route": "customer.index",
+			"name": "Klanten",
+			"icon": "users",
+			"slug": "customer.index"
+		},
+		{
+			"route": "product.index",
+			"name": "Producten",
+			"icon": "dolly-flatbed",
+			"slug": "product.index"
+		},
+		{
+			"route": "service.users",
+			"name": "Services",
+			"icon": "medkit",
+			"slug": "service.users"
+		},
+		{
+			"route": "productgroup.index",
+			"name": "Product groepen",
+			"icon": "layer-group",
+			"slug": "productgroup.index",
+			"permission": "manage productgroups"
+		},
+		{
+			"name": "Beheer",
+			"icon": "cog",
+			"slug": "beheer",
+			"permission": "show management",
+			"submenu": [
+				{
+					"route": "taxtype.index",
+					"name": "Belastingtypes",
+					"icon": "coins",
+					"slug": "taxtype.index",
+					"permission": "manage taxtypes"
+				},
+				
+				{
+					"route": "user.index",
+					"name": "Gebruikers",
+					"icon": "users",
+					"slug": "user.index",
+					"permission": "manage users"
+				},
+				
+				{
+					"route": "permission.index",
+					"name": "Permissies",
+					"icon": "key",
+					"slug": "permission.index",
+					"permission": "manage permissions"
+				},
+				{
+					"route": "role.index",
+					"name": "Rollen",
+					"icon": "id-card-alt",
+					"slug": "role.index",
+					"permission": "manage roles"
+				},
+				{
+					"route": "service.index",
+					"name": "Services",
+					"icon": "medkit",
+					"slug": "service.index",
+					"permission": "manage services"
+				},
+				{
+					"name": "Status",
+					"icon": "plus-circle",
+					"slug": "status",
+					"submenu": [
+						{
+							"route": "invoicestatus.index",
+							"name": "Factuur Status",
+							"icon": "plus-circle",
+							"slug": "invoicestatus.index",
+							"permission": "manage invoicestatuses"
+						},
+						{
+							"route": "quotestatus.index",
+							"name": "Offerte Status",
+							"icon": "plus-circle",
+							"slug": "quotestatus.index",
+							"permission": "manage quotestatuses"
+						},
+						{
+							"route": "orderstatus.index",
+							"name": "Opdracht Status",
+							"icon": "plus-circle",
+							"slug": "orderstatus.index",
+							"permission": "manage orderstatuses"
+						}
+					]
+				},
+				{
+					"route": "hourtype.index",
+					"name": "Uurtypes",
+					"icon": "clock",
+					"slug": "hourtype.index",
+					"permission": "manage hourtypes"
+				},
+				{
+					"route": "setting.index",
+					"name": "Instellingen",
+					"icon": "cog",
+					"slug": "setting.index",
+					"permission": "manage settings"
+				}
+			]
+		}
+	]
+}
