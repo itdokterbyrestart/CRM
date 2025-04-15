@@ -7,12 +7,12 @@ use Throwable;
 
 class Handler extends ExceptionHandler
 {
-    public function report(Throwable $exception) // <-- USE Throwable HERE
+    public function report(Throwable $exception)
     {
         parent::report($exception);
     }
     
-    public function render($request, Throwable $exception) // AND HERE
+    public function render($request, Throwable $exception)
     {
         return parent::render($request, $exception);
     }
