@@ -58,7 +58,7 @@ Route::get('/factuur/{id}/download_pdf', [InvoiceController::class, 'downloadPdf
 	->name('invoice.customer.download_pdf');
 
 
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['auth','blocked']], function () {
 	// Dashboard
 	Route::get('/', [DashboardController::class, 'index'])
 		->name('dashboard');

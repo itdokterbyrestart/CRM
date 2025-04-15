@@ -64,12 +64,33 @@
 				</div>
 
 				<div class="col-12">
-					<div class="form-check mt-1">        
-						<input wire:model.blur="mail_report" type="checkbox" id="mail_report" class="form-check-input" @if ($edit === 0) disabled @endif>
-						<label for="mail_report" class="form-check-label">E-mail rapportage</label>
-						@error('mail_report')
-							<div class="invalid-feedback">{{ $message }}</div>
-						@enderror
+					<div class="d-flex">
+						<div class="form-check mt-1 mr-1">        
+							<input wire:model.blur="mail_report" type="checkbox" id="mail_report" class="form-check-input" @if ($edit === 0) disabled @endif>
+							<label for="mail_report" class="form-check-label">E-mail rapportage</label>
+							@error('mail_report')
+								<div class="invalid-feedback">{{ $message }}</div>
+							@enderror
+						</div>
+						<div class="form-check mt-1 mr-1">        
+							<input wire:model.blur="blocked" type="checkbox" id="blocked" class="form-check-input" @if ($edit === 0) disabled @endif>
+							<label for="blocked" class="form-check-label">Geblokkeerd</label>
+							@error('blocked')
+								<div class="invalid-feedback">{{ $message }}</div>
+							@enderror
+						</div>
+					</div>
+				</div>
+
+				<div class="col-12 mt-2">
+					<h6 class="mb-0">Rollen</h6>
+					<div class="d-flex">
+						@foreach ($roles as $role)
+							<div class="form-check mr-1">        
+								<input wire:model.blur="selected_roles.{{ $role->id }}" type="checkbox" id="role.{{ $role->id }}" class="form-check-input" @if ($edit === 0) disabled @endif>
+								<label for="role.{{ $role->id }}" class="form-check-label">{{ $role->name }}</label>
+							</div>
+						@endforeach
 					</div>
 				</div>
 
