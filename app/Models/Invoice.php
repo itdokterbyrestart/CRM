@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Traits\Uuid;
+use App\Traits\UUID;
 use App\Models\{
     Order,
     OrderProduct,
@@ -19,7 +19,7 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Invoice extends Model implements HasMedia, Viewable
 {
-    use Uuid, HasFactory, InteractsWithMedia, InteractsWithViews;
+    use UUID, HasFactory, InteractsWithMedia, InteractsWithViews;
 
     protected $keyType = 'uuid';
     public $incrementing = false;

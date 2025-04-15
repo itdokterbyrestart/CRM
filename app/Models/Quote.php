@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Traits\Uuid;
+use App\Traits\UUID;
 use App\Models\{
     Customer,
     QuoteProduct,
@@ -28,7 +28,7 @@ use Illuminate\Support\Carbon;
 
 class Quote extends Model implements HasMedia, Viewable
 {
-    use Uuid, HasFactory, InteractsWithMedia, InteractsWithViews;
+    use UUID, HasFactory, InteractsWithMedia, InteractsWithViews;
 
     protected $keyType = 'uuid';
     public $incrementing = false;
