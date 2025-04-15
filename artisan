@@ -50,8 +50,4 @@ $status = $kernel->handle(
 
 $kernel->terminate($input, $status);
 
-ini_set('display_errors', true); 
-ini_set('log_errors', true);
-ini_set('error_log', '/app/storage/logs/php.log');
-
 exit($status);
