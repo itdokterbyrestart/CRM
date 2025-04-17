@@ -4,6 +4,6 @@
 
 @section('content')
 
-@livewire('invoicestatus.form', ['model' => $invoicestatus, 'edit' => $edit])               
+@livewire('invoice-status.form', ['model' => $invoicestatus, 'edit' => $edit])               
 
 @endsection

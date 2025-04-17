@@ -4,6 +4,6 @@
 
 @section('content')
 
-@livewire('taxtype.form', ['model' => $taxtype, 'edit' => $edit])               
+@livewire('tax-type.form', ['model' => $taxtype, 'edit' => $edit])               
 
 @endsection

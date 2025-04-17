@@ -4,6 +4,6 @@
 
 @section('content')
 
-@livewire('hourtype.form', ['model' => $hourtype, 'edit' => $edit])               
+@livewire('hour-type.form', ['model' => $hourtype, 'edit' => $edit])               
 
 @endsection
