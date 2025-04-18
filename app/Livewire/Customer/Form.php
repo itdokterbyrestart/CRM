@@ -37,7 +37,7 @@ class Form extends Component
             'phone3' => 'nullable|string|max:255',
             'street' => 'nullable|string|max:255',
             'number' => 'nullable|string|max:255',
-            'postal_code' => 'nullable|string|max:6',
+            'postal_code' => 'nullable|string|max:7',
             'place_name' => 'nullable|string|max:255',
             'comment' => 'nullable|string',
             'generated' => 'required|boolean',

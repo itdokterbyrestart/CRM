@@ -34,7 +34,7 @@ class Form extends Component
     
     // General
     public $edit = 1;
-    public $users, $tax_types;
+    public $tax_types;
     // Quote
     public $title, $customer, $status = '', $status_comment, $description, $expiration_date, $quote_text, $show_product_group_images = true, $show_amount_and_total = true, $updated_at, $created_at, $modelId;
     public $customers, $quotestatus;

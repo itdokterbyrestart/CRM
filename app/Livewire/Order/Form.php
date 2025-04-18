@@ -50,7 +50,7 @@ class Form extends Component
         $this->customers = Customer::orderBy('name')->get();
         $this->orderstatus = OrderStatus::orderBy('order')->get();
         $this->products = Product::orderBy('name')->get();
-        $this->users = User::orderBy('name')->get();
+        $this->users = User::orderBy('name')->where('blocked', 0)->get();
         $this->hour_types = HourType::orderBy('name')->get();
         $this->tax_types = TaxType::orderBy('default','DESC')->orderBy('percentage','DESC')->get();
         $this->status = $this->orderstatus->where('name', 'Nog doen')->first()->id ?? '';
