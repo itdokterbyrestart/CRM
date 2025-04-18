@@ -88,16 +88,21 @@ class Form extends Component
             }
         }
 
+        $insert_array = [
+            'name' => $this->name,
+            'email' => $this->email,
+            'mail_report' => $this->mail_report,
+            'blocked' => $this->blocked,
+        ];
+
+        if (!empty($this->password)) {
+            $insert_array['password'] = Hash::make($this->password);
+        }
+
         try {
             User::updateOrCreate(
                 ['id' => $this->modelId],
-                [
-                    'name' => $this->name,
-                    'email' => $this->email,
-                    'password' => Hash::make($this->password),
-                    'mail_report' => $this->mail_report,
-                    'blocked' => $this->blocked,
-                ]
+                $insert_array
             )->syncRoles($selected_roles_array);
 
         } catch(\Exception $e) {
