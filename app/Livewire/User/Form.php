@@ -99,6 +99,10 @@ class Form extends Component
             $insert_array['password'] = Hash::make($this->password);
         }
 
+        if (Auth::user()->id != $this->modelId) {
+            $insert_array['blocked'] = $this->blocked;
+        }
+
         try {
             User::updateOrCreate(
                 ['id' => $this->modelId],

@@ -73,7 +73,7 @@
 							@enderror
 						</div>
 						<div class="form-check mt-1 mr-1">        
-							<input wire:model.blur="blocked" type="checkbox" id="blocked" class="form-check-input" @if ($edit === 0) disabled @endif>
+							<input wire:model.blur="blocked" type="checkbox" id="blocked" class="form-check-input" @if ($edit == 0 OR Auth::user()->id == $this->modelId) disabled @endif>
 							<label for="blocked" class="form-check-label">Geblokkeerd</label>
 							@error('blocked')
 								<div class="invalid-feedback">{{ $message }}</div>
