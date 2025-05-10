@@ -225,5 +225,9 @@ class SettingSeeder extends Seeder
         Setting::firstOrCreate(
             ['name' => 'link_to_apk_page'],
             ['value' => "https://deitdokter.nl/apk.html"]);
+
+        Setting::firstOrCreate(
+            ['name' => 'hour_cost_other_users'],
+            ['value' => "20"]);
     }
 }

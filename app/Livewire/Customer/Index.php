@@ -90,6 +90,9 @@ class Index extends Component
             }
             
         $customers = $customers
+            ->withCount(['services' => function ($q) {
+                $q->where('name', 'APK op afstand')->orWhere('name', 'APK aan huis');
+            }])
             ->orderBy($this->sortColumn, $this->sortDirection)
             ->paginate($this->paginationItemsAmount);
 

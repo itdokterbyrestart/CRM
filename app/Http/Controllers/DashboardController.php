@@ -8,12 +8,13 @@ use App\Models\{
     OrderProduct,
     Order,
     Product,
+    Setting,
 };
-use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -54,17 +55,17 @@ class DashboardController extends Controller
                 ->whereBetween('created_at',[$start_date,$end_date])
                 ->sum('profit');
 
-        $total_cost_hours_joris = 
+        $total_cost_hours_other_users = 
             (OrderHour::query()
                 ->whereBetween('date',[$start_date,$end_date])
-                ->where('user_id', 2)
-                ->sum('amount') * 20);
+                ->whereNot('user_id', Auth::user()->id)
+                ->sum('amount') * Setting::where('name', 'hour_cost_other_users')->first()->value ?? 20);
 
-        $total_cost = ($total_products_costs + $total_cost_hours_joris);
+        $total_cost = ($total_products_costs + $total_cost_hours_other_users);
 
-        $total_hours_profit = ($total_hours_revenue - $total_cost_hours_joris);
+        $total_hours_profit = ($total_hours_revenue - $total_cost_hours_other_users);
 
-        $total_profit = ($total_products_profit + $total_hours_revenue - $total_cost_hours_joris);
+        $total_profit = ($total_products_profit + $total_hours_revenue - $total_cost_hours_other_users);
 
         $order_hour_amount_sum = 
             OrderHour::query()
@@ -115,7 +116,7 @@ class DashboardController extends Controller
         $start_date_input = (date("Y-m-d",strtotime($start_date)));
         $end_date_input = (date("Y-m-d",strtotime($end_date)));
 
-        return view('content.dashboard.index', compact('breadcrumbs','start_date_input','end_date_input','total_hours_revenue','total_revenue','total_products_costs','total_products_revenue','total_products_profit','total_cost_hours_joris','total_cost','total_hours_profit','total_profit','order_hour_amount_sum','order_product_count','order_amount_count','unique_customer_count','mean_profit_per_hour','product_margin_sold_products','mean_order_products_count_per_order','mean_order_hours_amount_per_order'));
+        return view('content.dashboard.index', compact('breadcrumbs','start_date_input','end_date_input','total_hours_revenue','total_revenue','total_products_costs','total_products_revenue','total_products_profit','total_cost_hours_other_users','total_cost','total_hours_profit','total_profit','order_hour_amount_sum','order_product_count','order_amount_count','unique_customer_count','mean_profit_per_hour','product_margin_sold_products','mean_order_products_count_per_order','mean_order_hours_amount_per_order'));
     }
 
     public function date_change(Request $request)

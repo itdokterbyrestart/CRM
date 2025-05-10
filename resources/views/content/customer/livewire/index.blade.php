@@ -98,9 +98,11 @@
                                                         <li class="dropdown-item" wire:click="sendAppointmentMailConfirmation('{{ $customer->id }}','1')">
                                                             Afspraak maken
                                                         </li>
-                                                        <li class="dropdown-item" wire:click="sendAppointmentMailConfirmation('{{ $customer->id }}','2')">
-                                                            APK
-                                                        </li>
+                                                        @if ($customer->services_count > 0)
+                                                            <li class="dropdown-item" wire:click="sendAppointmentMailConfirmation('{{ $customer->id }}','2')">
+                                                                APK
+                                                            </li>
+                                                        @endif
                                                     </ul>
                                                     @can('delete customer')
                                                         <button class="btn btn-danger" wire:click="deleteConfirm('{{ $customer->id }}')">

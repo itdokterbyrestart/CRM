@@ -76,8 +76,8 @@
 						<h4 class="font-weight-light">€{{ number_format($total_products_costs, 2, ',', '.') }}</h4>
 					</div>
 					<div class="col-4">
-						<h5>Uren Joris</h5>
-						<h4 class="font-weight-light">€{{ number_format($total_cost_hours_joris, 2, ',', '.') }}</h4>
+						<h5>Uren andere gebruikers</h5>
+						<h4 class="font-weight-light">€{{ number_format($total_cost_hours_other_users, 2, ',', '.') }}</h4>
 					</div>
 					<div class="col-4">
 						<h5>Totaal</h5>

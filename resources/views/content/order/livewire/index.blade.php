@@ -140,7 +140,7 @@
                                                             <i class="fas fa-edit"></i>
                                                         </a> 
                                                     @endif
-                                                    @if (in_array($order->order_status->name,['Uitnodiging gestuurd']))
+                                                    @if (in_array($order->order_status->name,['Afspraak maken','Uitnodiging gestuurd']))
                                                         <button class="btn btn-success" wire:click="sendAppointmentMailConfirmation('{{ $order->id }}','2')">
                                                             <i class="fas fa-calendar"></i>
                                                         </button>
