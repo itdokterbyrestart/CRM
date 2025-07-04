@@ -20,6 +20,7 @@ use App\Http\Controllers\{
 	MollieWebhookController,
 	SettingController,
 	UserController,
+	EmailController,
 };
 use App\Http\Controllers\Auth\ProfileController;
 
@@ -66,10 +67,6 @@ Route::group(['middleware' => ['auth','blocked']], function () {
 		->name('dashboard');
 	Route::post('dashboard_date_change',[DashboardController::class, 'date_change'])
 		->name('dashboard.date_change');
-
-	// Run factories
-	// Route::get('factories', [DashboardController::class, 'factories'])
-	// 	->name('factories');
 
 	// Route::get('info', [InfoController::class, 'index'])
 	// 	->name('info');

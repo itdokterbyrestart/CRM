@@ -4,11 +4,11 @@
 ### Maand: {{ $month }}
 
 @component('mail::table')
-    | Klant | Service |
-    |:-|:-|
+    | Klant | Service | Beschrijving |
+    |:-|:-|:-|
     @php $customerservices = \App\Models\CustomerService::with(['customer','service'])->where('month', Carbon\Carbon::now()->month)->get() @endphp
     @foreach ($customerservices as $customerservice)
-        | {{ $customerservice->customer->name }} | {{ $customerservice->service->name }} |
+        | {{ (string)$customerservice->customer->name }} | {{ (string)$customerservice->service->name }} | {{ (string)$customerservice->description }} |
     @endforeach
 @endcomponent
 @endcomponent
