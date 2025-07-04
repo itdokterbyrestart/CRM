@@ -154,7 +154,10 @@ class ProfileController extends Controller
 
         $user->update($data);
 
-        Session::flash('success','De wijzigingen zijn doorgevoerd');
+        Session::flash('success', [
+            'title' => 'De wijzigingen zijn doorgevoerd',
+            'text' => ''
+        ]);
         return redirect(route('profile.show'));
     }
 }
